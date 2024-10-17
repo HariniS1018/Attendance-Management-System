@@ -6,17 +6,16 @@ from flask_mail import Mail
 
 app = Flask(__name__)
 
-DB_URL = "postgresql://postgres:postgreSQL@localhost:5432/amsdb3"
-app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(DB_URL)
 app.app_context().push()
 db = SQLAlchemy(app)
 
-app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'hariniks0618@gmail.com'
-app.config['MAIL_PASSWORD'] = 'gfah xgwu uohv oxbw' # app pwd made in gacc
-app.config['MAIL_DEFAULT_SENDER'] = 'hariniks0618@gmail.com'
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+app.config['MAIL_PORT'] = os.getenv(MAIL_PORT)
+app.config['MAIL_USE_TLS'] = os.getenv(MAIL_USE_TLS)
+app.config['MAIL_USERNAME'] = os.getenv(MAIL_USERNAME)
+app.config['MAIL_PASSWORD'] = os.getenv(MAIL_PASSWORD)
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv(MAIL_DEFAULT_SENDER)
 mail = Mail(app)
 
 if __name__ == '__main__':
